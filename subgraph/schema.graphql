@@ -4,3 +4,17 @@ type ExampleEntity @entity {
   attester: Bytes! # address
   profile: Bytes! # address
 }
+
+type Attestation @entity {
+  id: ID!
+  count: BigInt!
+  attester: Bytes! # address
+  profile: Bytes! # address
+}
+
+type Post @entity {
+  id: ID!
+  count: BigInt!
+  contentURI: String! 
+
+}

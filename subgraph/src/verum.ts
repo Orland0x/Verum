@@ -4,17 +4,17 @@ import {
   attestationPosted,
   contentPosted
 } from "../generated/Verum/Verum"
-import { ExampleEntity } from "../generated/schema"
+import { Attestation, Post } from "../generated/schema"
 
 export function handleattestationPosted(event: attestationPosted): void {
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
-  let entity = ExampleEntity.load(event.transaction.from.toHex())
+  let entity = Attestation.load(event.transaction.from.toHex())
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
   if (!entity) {
-    entity = new ExampleEntity(event.transaction.from.toHex())
+    entity = new Attestation(event.transaction.from.toHex())
 
     // Entity fields can be set using simple assignments
     entity.count = BigInt.fromI32(0)
@@ -48,4 +48,14 @@ export function handleattestationPosted(event: attestationPosted): void {
   // None
 }
 
-export function handlecontentPosted(event: contentPosted): void {}
+export function handlecontentPosted(event: contentPosted): void {
+  let entity = Post.load(event.transaction.from.toHex())
+  if (!entity) {
+    entity = new Post(event.transaction.from.toHex())
+
+    entity.count = BigInt.fromI32(0)
+  }
+  entity.contentURI = event.params.contentURI
+  entity.save()
+
+}
