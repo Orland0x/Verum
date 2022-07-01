@@ -1,0 +1,63 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "attester",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "profile",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum Verum.Attestation",
+        "name": "attestation",
+        "type": "uint8"
+      }
+    ],
+    "name": "attestationPosted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "contentURI",
+        "type": "string"
+      }
+    ],
+    "name": "contentPosted",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "profile", "type": "address" },
+      {
+        "internalType": "enum Verum.Attestation",
+        "name": "attestation",
+        "type": "uint8"
+      }
+    ],
+    "name": "attestToProfile",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "contentURI", "type": "string" }
+    ],
+    "name": "postContent",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

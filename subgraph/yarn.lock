@@ -206,7 +206,7 @@
     "@ethersproject/properties" "^5.6.0"
     "@ethersproject/strings" "^5.6.1"
 
-"@graphprotocol/graph-cli@^0.32.0":
+"@graphprotocol/graph-cli@0.32.0":
   version "0.32.0"
   resolved "https://registry.yarnpkg.com/@graphprotocol/graph-cli/-/graph-cli-0.32.0.tgz#d9e4e1ed65687f0756113fc0c5fc0e2103c2a8cb"
   integrity sha512-40Kii/Ttype5aNCaQn81AP7utyE6JKB5bI9QtYd6WoaS3oACICqdPA89+5UB1s9t6yXiFbWojK3e7JUokPdYfA==
@@ -236,6 +236,13 @@
     web3-eth-abi "1.7.0"
     which "2.0.2"
     yaml "1.9.2"
+
+"@graphprotocol/graph-ts@0.27.0":
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/@graphprotocol/graph-ts/-/graph-ts-0.27.0.tgz#948fe1716f6082964a01a63a19bcbf9ac44e06ff"
+  integrity sha512-r1SPDIZVQiGMxcY8rhFSM0y7d/xAbQf5vHMWUf59js1KgoyWpM6P3tczZqmQd7JTmeyNsDGIPzd9FeaxllsU4w==
+  dependencies:
+    assemblyscript "0.19.10"
 
 "@types/bn.js@^5.1.0":
   version "5.1.0"
