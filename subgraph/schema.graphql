@@ -1,20 +1,19 @@
-type ExampleEntity @entity {
-  id: ID!
-  count: BigInt!
-  attester: Bytes! # address
-  profile: Bytes! # address
-}
-
 type Attestation @entity {
   id: ID!
-  count: BigInt!
-  attester: Bytes! # address
+  blockNumber: BigInt!
+  attestor: Bytes! # address
   profile: Bytes! # address
 }
 
 type Post @entity {
   id: ID!
-  count: BigInt!
+  blockNumber: BigInt!
   contentURI: String! 
+}
 
+type Comment @entity {
+  id: ID! 
+  blockNumber : BigInt!
+  postID: ID!
+  contentURI: String!
 }
