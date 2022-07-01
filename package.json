@@ -1,0 +1,9 @@
+{
+  "name": "Verum",
+  "version": "1.0.0",
+  "description": "Truth Protocol",
+  "main": "index.js",
+  "repository": "https://github.com/Orland0x/Verum.git",
+  "author": "Orland0x <37511817+Orland0x@users.noreply.github.com>",
+  "license": "MIT"
+}
