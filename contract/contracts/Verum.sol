@@ -9,7 +9,7 @@ contract Verum {
     event commentPosted(uint256 postId, string commentURI);
     function postContent(string calldata _contentURI) external {
         postId++;
-        emit contentPosted(_contentURI);
+        emit contentPosted(postId, _contentURI);
     }
     function attestToProfile(address _profile, int8 _attestation) external {
         emit attestationPosted(msg.sender, _profile, _attestation);
