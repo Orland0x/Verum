@@ -23,5 +23,6 @@ dataSources:
           handler: handleAttestationPosted
         - event: contentPosted(uint256,string)
           handler: handleContentPosted
-        - event: commentPosted(uint256, string)
+        - event: commentPosted(uint256,string)
+          handler: handleCommentPosted
       file: ./src/verum.ts
