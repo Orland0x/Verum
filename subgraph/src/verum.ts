@@ -14,6 +14,7 @@ export function handleAttestationPosted(event: attestationPosted): void {
     attestation.count = BigInt.fromI32(0);
   }
   attestation.blockNumber = event.block.number;
+  attestation.timestamp = event.block.timestamp;
   attestation.attestor = event.params.attestor;
   attestation.profile = event.params.profile;
   attestation.value = BigInt.fromI32(event.params.attestation);
@@ -28,6 +29,8 @@ export function handleContentPosted(event: contentPosted): void {
     post.count = BigInt.fromI32(0);
   }  
   post.blockNumber = event.block.number;
+  post.timestamp = event.block.timestamp;
+  post.profile = event.transaction.from;
   post.contentURI = event.params.contentURI;
   post.count = post.count + BigInt.fromI32(1);
   post.save()
@@ -40,6 +43,7 @@ export function handleCommentPosted(event: commentPosted): void {
     comment.count = BigInt.fromI32(0);
   }  
   comment.blockNumber = event.block.number;
+  comment.timestamp = event.block.timestamp;
   comment.postID = event.params.postId.toHex();
   comment.contentURI = event.params.commentURI;
   comment.count = comment.count + BigInt.fromI32(1);

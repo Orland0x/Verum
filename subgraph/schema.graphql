@@ -1,6 +1,7 @@
 type Attestation @entity {
   id: ID! # hash of attesation tx
   blockNumber: BigInt!
+  timestamp: BigInt!
   attestor: Bytes! # address
   profile: Bytes! # address
   value: BigInt!
@@ -10,6 +11,8 @@ type Attestation @entity {
 type Post @entity {
   id: ID! # The post Id
   blockNumber: BigInt!
+  timestamp: BigInt!
+  profile: Bytes! # address of post creator
   contentURI: String! 
   count: BigInt!
 }
@@ -17,7 +20,9 @@ type Post @entity {
 type Comment @entity {
   id: ID! # hash of comment tx
   blockNumber : BigInt!
+  timestamp: BigInt!
   postID: ID!
   contentURI: String!
   count: BigInt!
 }
+
