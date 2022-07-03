@@ -19,7 +19,7 @@ type Post @entity {
 
 type Comment @entity {
   id: ID! # hash of comment tx
-  blockNumber : BigInt!
+  blockNumber: BigInt!
   timestamp: BigInt!
   postID: ID!
   contentURI: String!
