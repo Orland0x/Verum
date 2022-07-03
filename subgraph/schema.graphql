@@ -21,6 +21,7 @@ type Comment @entity {
   id: ID! # hash of comment tx
   blockNumber: BigInt!
   timestamp: BigInt!
+  profile: Bytes!
   postID: ID!
   contentURI: String!
   count: BigInt!

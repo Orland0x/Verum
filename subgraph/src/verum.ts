@@ -44,6 +44,7 @@ export function handleCommentPosted(event: commentPosted): void {
   }  
   comment.blockNumber = event.block.number;
   comment.timestamp = event.block.timestamp;
+  comment.profile = event.transaction.from;
   comment.postID = event.params.postId.toHex();
   comment.contentURI = event.params.commentURI;
   comment.count = comment.count + BigInt.fromI32(1);

@@ -12,6 +12,7 @@ contract Verum {
         emit contentPosted(postId, _contentURI);
     }
     function attestToProfile(address _profile, int8 _attestation) external {
+        require(msg.sender!=_profile, "Cannot attest to yourself");
         emit attestationPosted(msg.sender, _profile, _attestation);
     }
     function postComment(uint256 _postId, string calldata _commentURI) external {
