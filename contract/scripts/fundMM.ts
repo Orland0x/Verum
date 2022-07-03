@@ -1,12 +1,13 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const Verum = await ethers.getContractFactory("Verum");
-  const verum = await Verum.deploy();
+    const [owner] = await ethers.getSigners();
 
-  await verum.deployed();
+    await owner.sendTransaction({
+        to: "0x341021d26272F94CecD25C29539266ecDf4bB1b2",
+        value: ethers.utils.parseEther("0.1"), 
+      });
 
-  console.log("Verum deployed to:", verum.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
