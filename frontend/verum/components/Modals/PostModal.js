@@ -1,10 +1,43 @@
 import { motion } from "framer-motion";
 import AvatarIcon from '../Content/AvatarIcon';
 import { useAccount, useSigner } from 'wagmi';
-import { FaPaperPlane } from 'react-icons/fa';
+import { FaPaperPlane, FaRedo } from 'react-icons/fa';
+import { create } from 'ipfs-http-client';
+import { useState, useEffect } from 'react';
+import { postContent } from '../../utils/contractUtils';
 
 export default function PostModal(props) {
   const { address } = useAccount();
+  const { data: signer } = useSigner();
+  const [ipfs, setIpfs] = useState(null);
+  const [posted, setPosted] = useState(false);
+  const [txState, setTxState] = useState(null);
+
+  function handleTx(tx) {
+    setTxState('pending...');
+    tx.wait().then((response) => {
+      setTxState('uploaded!');
+    }).catch((error) => {
+      setTxState('failed!');
+    })
+  }
+
+  useEffect(() => {
+    setIpfs(create({
+      url: 'https://ipfs.infura.io:5001/api/v0',
+    }));
+  }, []);
+
+  async function createPost(event) {
+    event.preventDefault();
+    const { content } = event.target.elements;
+    const res = await ipfs.add(JSON.stringify({
+      content: content.value
+    }));
+    const tx = await postContent(signer, `ipfs://${res.path}`);
+    handleTx(tx);
+    setPosted(true);
+  }
 
   return (
     <>
@@ -17,23 +50,38 @@ export default function PostModal(props) {
             initial={{ y: 10, opacity: 0 }}>
         <div className="relative w-auto my-6 mx-auto max-w-full max-h-screen my-5 mx-5 py-5">
           <div className="w-full p-4 bg-white border border-gray-200 rounded-2xl border-gray-500 shadow-md my-4" onClick={e => {e.stopPropagation();}}>
-            <div className="flex items-center justify-around space-x-2">
-              <div className="mr-2">
-                {address ? <AvatarIcon address={address}/>:
-                <div className="h-10 w-10 rounded-full bg-gray-300"></div>}
+            {posted ?
+              <>
+              <div className="flex items-center justify-around space-x-2">
+                <div className="mr-2">
+                  {address ? <AvatarIcon address={address}/>:
+                  <div className="h-10 w-10 rounded-full bg-gray-300"></div>}
+                </div>
+                <h3 className="text-xl font-semibold">Post {txState}</h3>
               </div>
-              <textarea
-                type="text"
-                name="comment"
-                autoComplete="off"
-                placeholder="Start typing..."
-                className="w-96 px-4 py-2 outline-none rounded-xl border border-black shadow-sm"
-              />
-
-            </div>
-            <div className="flex justify-center mt-3">
-              <button className="px-4 py-2 bg-blue-800 text-white rounded-xl"><FaPaperPlane/></button>
-            </div>
+              <div className="flex justify-center mt-3">
+                <button className="px-4 py-2 bg-blue-800 text-white rounded-xl" onClick={() => setPosted(false)}><FaRedo/></button>
+              </div>
+              </>
+            :
+            <form onSubmit={createPost}>
+              <div className="flex items-center justify-around space-x-2">
+                <div className="mr-2">
+                  {address ? <AvatarIcon address={address}/>:
+                  <div className="h-10 w-10 rounded-full bg-gray-300"></div>}
+                </div>
+                <textarea
+                  type="text"
+                  name="content"
+                  autoComplete="off"
+                  placeholder="Start typing..."
+                  className="w-96 px-4 py-2 outline-none rounded-xl border border-black shadow-sm"
+                />
+              </div>
+              <div className="flex justify-center mt-3">
+                <button type="submit" className="px-4 py-2 bg-blue-800 text-white rounded-xl"><FaPaperPlane/></button>
+              </div>
+            </form>}
           </div>
         </div>
         </motion.main>
