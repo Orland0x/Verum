@@ -1,19 +1,23 @@
 type Attestation @entity {
-  id: ID!
+  id: ID! # hash of attesation tx
   blockNumber: BigInt!
   attestor: Bytes! # address
   profile: Bytes! # address
+  value: BigInt!
+  count: BigInt!
 }
 
 type Post @entity {
-  id: ID!
+  id: ID! # The post Id
   blockNumber: BigInt!
   contentURI: String! 
+  count: BigInt!
 }
 
 type Comment @entity {
-  id: ID! 
+  id: ID! # hash of comment tx
   blockNumber : BigInt!
   postID: ID!
   contentURI: String!
+  count: BigInt!
 }
