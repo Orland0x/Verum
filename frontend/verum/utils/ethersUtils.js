@@ -37,5 +37,13 @@ export async function resolveAddressToEns(input) {
 }
 
 export function formatAddress(address) {
-  return address.slice(0,5) + "..." + address.slice(-4);
+  return address.slice(0,4) + "..." + address.slice(-4);
+}
+
+export function fetchIPFSData(cid) {
+  const ipfsData = fetch('https://ipfs.io/ipfs/' + cid).then(async (response) => {
+    const data = await response.json();
+    return data;
+  })
+  return ipfsData;
 }
