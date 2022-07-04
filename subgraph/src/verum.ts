@@ -27,9 +27,10 @@ export function handleAttestationPosted(event: attestationPosted): void {
     reputationWrapper.count = BigInt.fromI32(0);
     reputationWrapper.currentReputation = BigInt.fromI32(0);
   }
-  let cumulativeReputation = new CumulativeReputation(reputationWrapper.count.toHex());
+  let cumulativeReputation = new CumulativeReputation(event.transaction.hash.toHex());
   cumulativeReputation.timestamp = event.block.timestamp;
   cumulativeReputation.value = reputationWrapper.currentReputation + BigInt.fromI32(event.params.attestation);
+  cumulativeReputation.profile = event.params.profile;
   reputationWrapper.currentReputation = cumulativeReputation.value;
   cumulativeReputation.save();
   reputationWrapper.count = reputationWrapper.count + BigInt.fromI32(1);
@@ -45,7 +46,7 @@ export function handleContentPosted(event: contentPosted): void {
   }  
   post.blockNumber = event.block.number;
   post.timestamp = event.block.timestamp;
-  post.profile = event.transaction.from.toHex();
+  post.profile = event.transaction.from;
   post.contentURI = event.params.contentURI;
   post.count = post.count + BigInt.fromI32(1);
   post.save()
