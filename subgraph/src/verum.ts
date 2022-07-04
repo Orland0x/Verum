@@ -5,7 +5,7 @@ import {
   contentPosted,
   commentPosted
 } from "../generated/Verum/Verum"
-import { Attestation, Post, Comment } from "../generated/schema"
+import { Attestation, Post, Comment, ReputationWrapper, CumulativeReputation } from "../generated/schema"
 
 export function handleAttestationPosted(event: attestationPosted): void {
   let attestation = Attestation.load(event.transaction.hash.toHex())
@@ -20,6 +20,21 @@ export function handleAttestationPosted(event: attestationPosted): void {
   attestation.value = BigInt.fromI32(event.params.attestation);
   attestation.count = attestation.count + BigInt.fromI32(1);
   attestation.save()
+
+  let reputationWrapper = ReputationWrapper.load(event.params.profile.toHex());
+  if (!reputationWrapper) {
+    reputationWrapper = new ReputationWrapper(event.params.profile.toHex());
+    reputationWrapper.count = BigInt.fromI32(0);
+    reputationWrapper.currentReputation = BigInt.fromI32(0);
+  }
+  let cumulativeReputation = new CumulativeReputation(reputationWrapper.count.toHex());
+  cumulativeReputation.timestamp = event.block.timestamp;
+  cumulativeReputation.value = reputationWrapper.currentReputation + BigInt.fromI32(event.params.attestation);
+  reputationWrapper.currentReputation = cumulativeReputation.value;
+  cumulativeReputation.save();
+  reputationWrapper.count = reputationWrapper.count + BigInt.fromI32(1);
+  reputationWrapper.save();
+
 }
 
 export function handleContentPosted(event: contentPosted): void {
@@ -30,7 +45,7 @@ export function handleContentPosted(event: contentPosted): void {
   }  
   post.blockNumber = event.block.number;
   post.timestamp = event.block.timestamp;
-  post.profile = event.transaction.from;
+  post.profile = event.transaction.from.toHex();
   post.contentURI = event.params.contentURI;
   post.count = post.count + BigInt.fromI32(1);
   post.save()

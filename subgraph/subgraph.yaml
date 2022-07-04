@@ -26,3 +26,5 @@ dataSources:
         - event: commentPosted(uint256,string)
           handler: handleCommentPosted
       file: ./src/verum.ts
+features:
+  - fullTextSearch

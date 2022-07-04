@@ -12,7 +12,7 @@ type Post @entity {
   id: ID! # The post Id
   blockNumber: BigInt!
   timestamp: BigInt!
-  profile: Bytes! # address of post creator
+  profile: String! # address of post creator
   contentURI: String! 
   count: BigInt!
 }
@@ -27,3 +27,14 @@ type Comment @entity {
   count: BigInt!
 }
 
+type ReputationWrapper @entity {
+  id: ID! # profile address
+  count: BigInt! # Number of attestations made
+  currentReputation: BigInt!
+}
+
+type CumulativeReputation @entity {
+  id: ID! # the count of the attestation 
+  timestamp: BigInt!
+  value: BigInt!
+}
