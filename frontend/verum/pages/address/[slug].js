@@ -1,6 +1,7 @@
 import Main from '../../components/Layout';
 import ProfileContent from '../../components/Content/ProfileContent';
 import ProfileContentSkeleton from '../../components/Skeletons/ProfileContentSkeleton';
+import ReputationChart from '../../components/Charts/ReputationChart';
 import { formatAddress,
         isAddress,
         isEns,
@@ -28,6 +29,8 @@ export default function Browse() {
   const [filter, setFilter] = useState(0);
   const [attestationValue, setAttestationValue] = useState(0);
   const [attested, setAttested] = useState(false);
+  const [toggle, setToggle] = useState(true);
+  const toggleClass = " transform translate-x-5";
 
   useEffect(() => {
     if (!slug) return;
@@ -60,12 +63,23 @@ export default function Browse() {
   const { data:attestationsReceived, error:attestationsReceivedError } = useSWR(address ? '/api/attestationsReceived?address=' + address : null, fetcher);
   const { data:attestationsGiven, error:attestationsGivenError } = useSWR(address ? '/api/attestationsGiven?address=' + address : null, fetcher);
   const { data:currentAttestation, error:currentAttestationError } = useSWR(address && connectedAddress && address.toLowerCase() != connectedAddress.toLowerCase() ? '/api/getAttestation?attestor=' + connectedAddress + '&profile='+ address : null, fetcher);
+  const { data:cumulativeReputation, error:cumulativeReputationError } = useSWR(address ? '/api/cumulative-reputation?address=' + address : null, fetcher);
+
   if (validSearch) {
     return (
       <Main active={address && connectedAddress && connectedAddress.toLowerCase() == address.toLowerCase() ? 'profile' : null }>
         <div className="flex flex-col-reverse md:flex-row mt-14 text-gray-700 space-x-6 justify-between">
           <div className="md:w-2/3 mt-10 md:mt-0">
-            <div className="flex justify-around md:items-center space-x-4">
+            <div className="flex flex-row justify-center items-center mb-10 mt-4">
+              <p className="text-black mx-3 font-semibold text-lg">Profile</p>
+              <div className="md:w-14 md:h-7 w-12 h-6 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer" onClick={() => {setToggle(!toggle);}}>
+                <div className={"bg-blue-800 md:w-6 md:h-6 h-5 w-5 rounded-full shadow-md transform duration-300 ease-in-out" + (toggle ? null : toggleClass)}></div>
+              </div>
+              <p className="text-black mx-3 font-semibold text-lg">History</p>
+            </div>
+            {toggle ?
+            <>
+            <div className="flex flex-row justify-around md:items-center space-x-4">
               <div className={"w-24 text-lg flex justify-center py-1 duration-200 hover:font-semibold hover:cursor-pointer" + (filter == 0 ? " font-semibold" : "")} onClick={() => setFilter(0)}>
                 Posts
               </div>
@@ -81,6 +95,8 @@ export default function Browse() {
               <ProfileContentSkeleton filter={filter}/>:
               <ProfileContent filter={filter} posts={posts} attestationsReceived={attestationsReceived} attestationsGiven={attestationsGiven}/>}
             </div>
+            </>:
+            <ReputationChart data={cumulativeReputation}/>}
           </div>
 
           <div className="md:w-1/3">

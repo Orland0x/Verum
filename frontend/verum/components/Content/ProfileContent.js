@@ -31,7 +31,7 @@ export default function ProfileContent({ filter, posts, attestationsReceived, at
       return (
         <>
         {data.map((el, index) => (
-          <Attestation address={el.profile} key={index}/>
+          <Attestation address={el.profile} timestamp={el.timestamp} value={el.value} key={index}/>
         ))}
         </>
       )
@@ -46,7 +46,7 @@ export default function ProfileContent({ filter, posts, attestationsReceived, at
       return (
         <>
         {data.map((el, index) => (
-          <Attestation address={el.attestor} key={index}/>
+          <Attestation address={el.attestor} timestamp={el.timestamp} value={el.value} key={index}/>
         ))}
         </>
       )

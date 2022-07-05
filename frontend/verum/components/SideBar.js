@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useAccount } from 'wagmi';
 import { useEffect, useState } from 'react';
-import { FaPlus, FaUserAlt, FaNetworkWired, FaHome } from 'react-icons/fa';
+import { FaPlus, FaUserAlt, FaNetworkWired, FaHome, FaUsers } from 'react-icons/fa';
 
 export default function SideBar({ active, newPost }) {
   const { address } = useAccount();
@@ -21,7 +21,13 @@ export default function SideBar({ active, newPost }) {
               <p className="duration-100 ml-2">Browse</p>
             </div>
           </Link>
-          <Link href="/search" passHref>
+          <Link href="/networks" passHref>
+            <div className={"flex items-center font-medium cursor-pointer hover:bg-gray-200 px-4 py-2 rounded-xl duration-150" + (active == 'networks' ? " bg-blue-800 text-white hover:bg-blue-800" : " text-gray-700")}>
+              <FaUsers/>
+              <p className="duration-100 ml-2">Networks</p>
+            </div>
+          </Link>
+          <Link href="/new-network" passHref>
             <div className={"flex items-center font-medium cursor-pointer hover:bg-gray-200 px-4 py-2 rounded-xl duration-150" + (active == 'create' ? " bg-blue-800 text-white hover:bg-blue-800" : " text-gray-700")}>
               <FaNetworkWired/>
               <p className="duration-100 ml-2">Create Network</p>
