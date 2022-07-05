@@ -9,9 +9,6 @@ export default function BrowseSkeleton() {
       <PostSkeleton/>
       <PostSkeleton/>
       <PostSkeleton/>
-      <PostSkeleton/>
-      <PostSkeleton/>
-      <PostSkeleton/>
     </>
   )
 }
