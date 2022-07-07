@@ -42,10 +42,11 @@ export default function Post({ sliceAmount, postData, suppressClick }) {
           <>
           {sliceAmount && content.content.length > sliceAmount ? content.content.slice(0, sliceAmount) + "..." : content.content}
           </>:null}
-          {content.images &&
+          {content.urls &&
           <div className="text-center mt-5 flex flex-row gap-x-3">
-            <img src="https://www.databentobox.com/2019/07/28/facebook-friend-graph/featured.png" width={100} height={100}></img>
-            <img src="https://www.databentobox.com/2019/07/28/facebook-friend-graph/featured.png" width={100} height={100}></img>
+            {content.urls.map((el, index) => (
+              <img src={el} width={100} height={100} key={index}></img>
+            ))}
           </div>}
           </div>
         </div>

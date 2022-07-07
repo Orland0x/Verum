@@ -41,7 +41,6 @@ export default function PostModal(props) {
       urls: splitLines
     }));
     const tx = await postContent(signer, `ipfs://${res.path}`);
-    console.log(res.path)
     handleTx(tx);
     setPosted(true);
   }
