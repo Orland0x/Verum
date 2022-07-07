@@ -1,15 +1,18 @@
 # Verum
 
+### Motivation
+
 How can one trust what they see online? In an age of digital content, where anyone can post or share anything, 
 it becomes increasingly difficult to have any trust in the content you are seeing. One particularly scary example 
 of this is deep fake videos and photos.
 
+### How can a blockchain be used to fix this? 
+
 The blockchain makes it very easy to track the origin of a piece of content that got posted and view the history 
 of the person that posted it. We can then use this information to decide on how much trust to place in the content. 
 
-A photographer is posting pictures of the ukrainian war via on chain transactions from a specfic ethereum address.
-This is going fine until one day they post a photo from a different war, pretending it was from ukraine. People spot 
-this dishonestly and then in future will make sure to put less trust in this person in future. 
+For example, a photographer is posting pictures of the ukrainian war via on chain transactions from a specfic ethereum address. This is going fine until one day they post a photo from a different war, pretending it was from ukraine. People spot this dishonestly and then in future will make sure to put less trust in this person in future. We built Verum to make use of this mechanism to aid in the determination of truth.  
+
 
 
 There are 2 core actions that users can make: posting content to their own profile,  and attesting the truthfulness
