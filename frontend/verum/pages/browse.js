@@ -20,7 +20,8 @@ export default function Browse() {
         <>
         <h1 className="text-center text-3xl font-bold">Posts</h1>
         <h3 className="text-center text-xl font-semibold mt-3">{network.name}</h3>
-        <div className="flex justify-center">
+        <div className="flex justify-center gap-x-3">
+          <GenericButton action={() => router.push('/network/' + network.cid)}>View details</GenericButton>
           <GenericButton action={() => router.push('/networks')}>Change network</GenericButton>
         </div>
         <div className="grid grid-cols-1 mt-5">

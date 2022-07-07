@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }) {
       localStorage.setItem('network', JSON.stringify(network))
     } else {
       const savedNetwork = localStorage.getItem('network')
-      if (Object.keys(savedNetwork).length != 0) {
+      if (savedNetwork != null && Object.keys(savedNetwork).length != 0) {
         setNetwork(JSON.parse(savedNetwork));
       }
     }
