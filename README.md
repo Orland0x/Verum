@@ -13,8 +13,8 @@ of the person that posted it. We can then use this information to decide on how 
 
 For example, a photographer is posting pictures of the ukrainian war via on chain transactions from a specfic ethereum address. This is going fine until one day they post a photo from a different war, pretending it was from ukraine. People spot this dishonestly and then in future will make sure to put less trust in this person in future. We built Verum to make use of this mechanism to aid in the determination of truth.  
 
-
-
+### How Verum works
+ 
 There are 2 core actions that users can make: posting content to their own profile,  and attesting the truthfulness
 of other user profiles. Both of these actions are achieved via an on chain transaction that emits an event. 
 Posts consist of the IPFS uri of the content while attestations consist of a value that encodes the users degree 
