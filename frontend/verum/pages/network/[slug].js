@@ -54,7 +54,7 @@ export default function Browse() {
         <h3 className="text-3xl font-bold">{networkData.name}</h3>
         <p className="mt-4 text-sm">Created by: {networkData.creator != 'unknown' ? formatAddress(networkData.creator) : networkData.creator}</p>
         <div className="flex justify-center gap-x-3">
-          <GenericButton action={() => selectNetwork()}>Brose network</GenericButton>
+          <GenericButton action={() => selectNetwork()}>Browse network</GenericButton>
           {!networkPublic ? <GenericButton action={() => publicizeNetwork()}>Make public</GenericButton>:null}
         </div>
         <h3 className="text-xl font-semibold mt-4">Addresses:</h3>
