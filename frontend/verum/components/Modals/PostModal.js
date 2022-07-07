@@ -30,11 +30,18 @@ export default function PostModal(props) {
 
   async function createPost(event) {
     event.preventDefault();
-    const { content } = event.target.elements;
+    const { content, links } = event.target.elements;
+    let lines = links.value.split(", ")
+    const splitLines = [];
+    lines.forEach(element => {
+      splitLines.push(element);
+    });
     const res = await ipfs.add(JSON.stringify({
-      content: content.value
+      content: content.value,
+      urls: splitLines
     }));
     const tx = await postContent(signer, `ipfs://${res.path}`);
+    console.log(res.path)
     handleTx(tx);
     setPosted(true);
   }
@@ -70,6 +77,7 @@ export default function PostModal(props) {
                   {address ? <AvatarIcon address={address}/>:
                   <div className="h-10 w-10 rounded-full bg-gray-300"></div>}
                 </div>
+                <div className="flex flex-col">
                 <textarea
                   type="text"
                   name="content"
@@ -77,6 +85,8 @@ export default function PostModal(props) {
                   placeholder="Start typing..."
                   className="w-96 px-4 py-2 outline-none rounded-xl border border-black shadow-sm"
                 />
+                <input type="text" name="links" placeholder="URLs, seperated by commas" className="mt-4 px-4 py-2 outline-none rounded-xl border border-black shadow-sm"/>
+                </div>
               </div>
               <div className="flex justify-center mt-3">
                 <button type="submit" className="px-4 py-2 bg-blue-800 text-white rounded-xl"><FaPaperPlane/></button>
